@@ -179,4 +179,16 @@ addPostBtn.addEventListener("click", () => {
     window.localStorage.setItem("id", id);
     window.location = "postDetails.html";
   }
-  
+  function editPost(object) {
+    let obj = JSON.parse(decodeURIComponent(object));
+    document.getElementById("update-body").value = obj.body;
+    document.getElementById("update-title").value = obj.title;
+    window.localStorage.setItem("postId", obj.id)
+    let modal = document.getElementById("updatePost");
+    if (modal) {
+      let modalInstance = new bootstrap.Modal(modal);
+      modalInstance.show();
+    } else {
+      console.error("Modal element with ID 'updatePost' not found.");
+    }
+  }
