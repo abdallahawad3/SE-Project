@@ -267,3 +267,7 @@ addPostBtn.addEventListener("click", () => {
     }
   }
   
+  function showUserPosts(idOfUser) {
+    window.localStorage.setItem("idOfUser", idOfUser);
+    window.location = "profile.html";
+  }
