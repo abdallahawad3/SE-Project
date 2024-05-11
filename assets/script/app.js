@@ -192,3 +192,36 @@ addPostBtn.addEventListener("click", () => {
       console.error("Modal element with ID 'updatePost' not found.");
     }
   }
+  updatePostButton.addEventListener("click", () => {
+    let body = document.getElementById("update-body").value;
+    let title = document.getElementById("update-title").value;
+    let postId = localStorage.getItem("postId");
+    updatePost(title, body, postId);
+  })
+  
+  //Function to update post 
+  
+  async function updatePost(title, body, id) {
+    // console.log(title, body, id);
+    let token = window.localStorage.getItem("token");
+    let response = await fetch(`${baseUrl}posts/${id}`, {
+      method: "PUT",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        body: body,
+        title: title
+      })
+    });
+  
+    if (response.ok) {
+      let data = await response.json();
+      hideModel("updatePost");
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+    }
+  }
