@@ -103,3 +103,12 @@ function displayAllPosts(object) {
   
   };
 
+  // Event listener for the addPostBtn click
+addPostBtn.addEventListener("click", () => {
+    // Retrieving values from input fields
+    let title = document.getElementById("tittle").value;
+    let body = document.getElementById("body-for-post").value;
+    let image = document.getElementById("formimage").files[0];
+    // Calling the addNewPost function with the provided data
+    addNewPost(title, body, image);
+  });
