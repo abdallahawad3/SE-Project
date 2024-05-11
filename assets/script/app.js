@@ -112,3 +112,48 @@ addPostBtn.addEventListener("click", () => {
     // Calling the addNewPost function with the provided data
     addNewPost(title, body, image);
   });
+  //Function to add a new post
+  async function addNewPost(title, body, image) {
+    // Creating a FormData object to handle file upload
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('body', body);
+    formData.append('image', image);
+    // Retrieving the user token from local storage
+    let token = window.localStorage.getItem("token");
+    try {
+      // Sending a POST request to add a new post
+      const response = await fetch("https://tarmeezacademy.com/api/v1/posts", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: formData,
+      });
+      // Handling the response
+      if (response.ok) {
+        const contentType = response.headers.get("Content-Type");
+        if (contentType && contentType.includes("application/json")) {
+          hideModel("addPost");
+          showSuccessAlert("You Added Post Successfully!");
+          setTimeout(() => {
+            location.reload();
+          }, 500);
+        } else {
+          // Handling error response
+          console.log(response);
+          console.log("Unexpected response format");
+        }
+      } else {
+        let data = await response.json();
+        showDangerAlert(data.message)
+      }
+  
+    } catch (error) {
+      // Handling general error
+      showDangerAlert("You must hhh");
+    }
+  
+  }
+  
