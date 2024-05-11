@@ -174,4 +174,9 @@ addPostBtn.addEventListener("click", () => {
       spinner.parentNode.removeChild(spinner);
     }
   }
+
+  function postClicked(id) {
+    window.localStorage.setItem("id", id);
+    window.location = "postDetails.html";
+  }
   
