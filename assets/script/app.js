@@ -156,4 +156,22 @@ addPostBtn.addEventListener("click", () => {
     }
   
   }
+  function showLoadingIndicator() {
+    // Create a loading spinner element
+    const spinner = document.createElement('div');
+    spinner.className = 'loading-spinner';
+    // You may want to add styles or use a library for more complex spinners
+  
+    // Append the spinner to the body or another container element
+    document.body.appendChild(spinner);
+  }
+  
+  
+  function hideLoadingIndicator() {
+    // Find and remove the loading spinner element
+    const spinner = document.querySelector('.loading-spinner');
+    if (spinner) {
+      spinner.parentNode.removeChild(spinner);
+    }
+  }
   
