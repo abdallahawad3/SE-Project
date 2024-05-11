@@ -225,3 +225,45 @@ addPostBtn.addEventListener("click", () => {
       }, 500);
     }
   }
+
+  function deletePost(object) {
+    let obj = JSON.parse(decodeURIComponent(object));
+    window.localStorage.setItem("deletePostId", obj.id)
+    let modal = document.getElementById("deletePostModel");
+    if (modal) {
+      let modalInstance = new bootstrap.Modal(modal);
+      modalInstance.show();
+    } else {
+      console.error("Modal element with ID 'updatePost' not found.");
+    }
+  }
+  
+  deletePostButton.addEventListener("click", () => {
+    let postId = localStorage.getItem("deletePostId");
+    deletePostEver(postId);
+  });
+  
+  async function deletePostEver(id) {
+    let token = localStorage.getItem("token");
+    let response = await fetch(`${baseUrl}posts/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify(
+        {
+          "body": "hello sdffsdsfds"
+        })
+    });
+  
+    if (response.ok) {
+      hideModel("deletePostModel");
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+      showSuccessAlert("The post are deleted successfully");
+    }
+  }
+  
