@@ -47,6 +47,7 @@ async function fetchAllPosts(page) {
     lastPage = data.meta.last_page;
     displayAllPosts(data.data)
   } catch (error) {
+    
     console.log(error);
   }
 }
