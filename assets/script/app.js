@@ -47,8 +47,59 @@ async function fetchAllPosts(page) {
     lastPage = data.meta.last_page;
     displayAllPosts(data.data)
   } catch (error) {
-    
+
     console.log(error);
   }
 }
+function displayAllPosts(object) {
+    let temp = "";
+    let currentUser = JSON.parse(window.localStorage.getItem("user"));
+    let editButtonContent = ``;
+  
+    object.forEach(element => {
+      if (currentUser !== null && currentUser.id !== null && currentUser.id === element.author.id) {
+        editButtonContent = `
+          <button class = "btn btn-secondary p-1 px-2" onclick="editPost('${encodeURIComponent(JSON.stringify(element))}')" >EDIT</button>
+          <button class = "btn btn-danger p-1 px-2" onclick = "deletePost('${encodeURIComponent(JSON.stringify(element))}')">Delete</button>
+        `
+      } else {
+        editButtonContent = ``;
+      }
+      temp = `
+      <div class="card col-12 col-lg-9 mx-auto shadow-lg mb-4">
+      <div class="card-header d-flex align-items-center justify-content-between">
+        <div onclick = "showUserPosts(${element.author.id})">
+          <img src="${typeof element.author.profile_image === 'string' ? element.author.profile_image : 'https://placehold.co/50'}" alt="User image">
+          <span class="fw-bold">${typeof element.author.username == 'string' ? element.author.username : "UserName"}</span>
+        </div>
+        <div>
+          ${editButtonContent}
+        </div>
+      </div>
+      <div class="card-body" onclick="postClicked(${element.id})">
+        <div class="card-image">
+          <img class="w-100" src="${typeof element.image == 'string' ? element.image : "https://placehold.co/600x400"}"
+            alt="main image">
+        </div>
+        <div class="card-info border-bottom">
+          <h6 class="text-black-50 mt-1">${element.created_at}</h6>
+          <h5>${typeof element.title == 'string' ? element.title : "title"}</h5>
+          <p>${typeof element.body == 'string' ? element.body : "text of body"}</p>
+        </div>
+  
+        <div class="card-tags mt-2 d-flex align-items-center gap-3">
+              <div class="comments d-flex align-items-center gap-1">
+                <i class="bi bi-pen"></i>
+                <p class="mb-0">
+                  <span>(${element.comments_count}) </span>Comments
+                </p>
+              </div>
+            </div>
+      </div>
+    </div>
+      `
+      posts.innerHTML += temp;
+    });
+  
+  };
 
