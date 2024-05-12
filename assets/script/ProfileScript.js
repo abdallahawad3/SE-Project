@@ -43,3 +43,19 @@ function headerInfo(object) {
   mainHead.innerHTML = temp;
   authorName.innerHTML = temp2;
 }
+
+allUserPosts()
+async function allUserPosts() {
+  let request = await fetch(`${url}/users/${userId}/posts`, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    }
+  });
+  if (request.ok) {
+    let data = await request.json();
+    // console.log(data.data);
+    displayAllUserPosts(data.data);
+  }
+}
