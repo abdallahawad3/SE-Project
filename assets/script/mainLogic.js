@@ -124,3 +124,33 @@ logout.addEventListener("click", () => {
   setUiAfterLoginAndRegister();
 });
 
+// Function to display a success alert with a given message
+function showSuccessAlert(message) {
+  const successAlert = document.getElementById("success-alert");
+  let temp = `
+  <span>${message}</span>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  `
+  successAlert.innerHTML = temp;
+  successAlert.setAttribute('style', 'display:block !important');
+  setTimeout(() => {
+    successAlert.setAttribute('style', 'display:none !important');
+  }, 4000);
+}
+
+// Function to display a danger alert with a given message
+function showDangerAlert(message) {
+  const logout = document.getElementById("logout-alert");
+  let temp = `
+  <span>${message}</span>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  `
+  logout.innerHTML = temp;
+  logout.setAttribute('style', 'display:block !important');
+  setTimeout(() => {
+    logout.setAttribute('style', 'display:none !important');
+  }, 4000);
+}
+
+
+
