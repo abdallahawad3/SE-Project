@@ -78,3 +78,10 @@ async function Register(name, username, image, email, password) {
   }
 }
 
+// Function to send data for login using a POST request and authenticate the user
+LoginButton.addEventListener("click", () => {
+  let username = document.getElementById("username").value;
+  let password = document.getElementById("login-password").value;
+  login(username, password);
+});
+
