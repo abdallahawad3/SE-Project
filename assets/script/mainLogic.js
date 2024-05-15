@@ -91,3 +91,28 @@ function hideModel(modelName) {
   let modelInstance = bootstrap.Modal.getInstance(model);
   modelInstance.hide();
 }
+
+// Function to set up the user interface
+function setUiAfterLoginAndRegister() {
+  let token = window.localStorage.getItem("token");
+  let data = JSON.parse(localStorage.getItem("user"));
+  if (token) {
+    if (addPostButton != null) {
+      addPostButton.style.display = "block";
+    }
+    logoutButton.setAttribute('style', 'display:flex !important');
+    LoginButtonsGroup.setAttribute('style', 'display:none !important');
+    document.getElementById("profile-user-image").setAttribute("src", `${data.profile_image}`);
+    document.getElementById("user-name").innerHTML = data.username;
+
+  } else {
+
+    if (addPostButton != null) {
+      addPostButton.setAttribute('style', 'display:none !important');
+    }
+    logoutButton.setAttribute('style', 'display:none !important');
+    LoginButtonsGroup.setAttribute('style', 'display:flex !important');
+  }
+}
+
+
