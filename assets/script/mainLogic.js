@@ -116,3 +116,11 @@ function setUiAfterLoginAndRegister() {
 }
 
 
+// Function to log out the user and set up the user interface
+logout.addEventListener("click", () => {
+  window.localStorage.removeItem("token");
+  window.localStorage.removeItem("user");
+  showDangerAlert("You have been logged out !");
+  setUiAfterLoginAndRegister();
+});
+
