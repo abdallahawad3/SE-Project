@@ -6,7 +6,7 @@ const logoutButton = document.getElementById("logout-btn");
 const logout = document.getElementById("logout");
 const LoginButtonsGroup = document.getElementById("btns-group");
 
-// Function to facilitate user login
+
 async function login(username, pass) {
   let response = await fetch(`${baseUrl}login`, {
     method: "POST",
@@ -115,6 +115,7 @@ function setUiAfterLoginAndRegister() {
   }
 }
 
+
 // Function to log out the user and set up the user interface
 logout.addEventListener("click", () => {
   window.localStorage.removeItem("token");
@@ -165,3 +166,5 @@ function profileClicked() {
   window.localStorage.setItem("idOfUser", user.id);
   window.location = "profile.html";
 }
+
+

@@ -272,3 +272,5 @@ addPostBtn.addEventListener("click", () => {
     window.location = "profile.html";
   }
 
+}
+
