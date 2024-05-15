@@ -43,3 +43,38 @@ RegisterButton.addEventListener("click", () => {
   Register(name, username, image, email, password);
 });
 
+// Function to register a new user
+async function Register(name, username, image, email, password) {
+  try {
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('username', username);
+    formData.append('image', image);
+    formData.append('email', email);
+    formData.append('password', password);
+    let response = await fetch("https://tarmeezacademy.com/api/v1/register", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+      },
+      body: formData,
+    });
+
+    if (response.ok) {
+      let data = await response.json();
+      window.localStorage.setItem("token", data.token);
+      window.localStorage.setItem("user", JSON.stringify(data.user));
+      hideModel("registerModel");
+      showSuccessAlert(`Registration successful! Welcome, ${data.user.username} !`);
+      setUiAfterLoginAndRegister();
+    } else {
+      let data = await response.json();
+      showDangerAlert(data.message);
+    }
+  } catch (error) {
+    console.log(error.message);
+
+  }
+}
+
