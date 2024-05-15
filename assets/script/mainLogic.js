@@ -152,5 +152,19 @@ function showDangerAlert(message) {
   }, 4000);
 }
 
+// Function to show data from local storage and set up UI after login or registration
+function showData() {
+  let data = JSON.parse(window.localStorage.getItem("user"));
+  if (data) {
+    setUiAfterLoginAndRegister();
+  }
+}
+showData();
+
+function profileClicked() {
+  let user = JSON.parse(localStorage.getItem("user"));
+  window.localStorage.setItem("idOfUser", user.id);
+  window.location = "profile.html";
+}
 
 
