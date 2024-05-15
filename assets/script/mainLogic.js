@@ -32,3 +32,14 @@ async function login(username, pass) {
     showDangerAlert(data.message);
   }
 }
+
+// Function to send data for registration using a POST request and create a new user
+RegisterButton.addEventListener("click", () => {
+  let name = document.getElementById("register-name").value;
+  let username = document.getElementById("register-username").value;
+  let image = document.getElementById("register-image").files[0];
+  let email = document.getElementById("register-email").value;
+  let password = document.getElementById("register-password").value;
+  Register(name, username, image, email, password);
+});
+
