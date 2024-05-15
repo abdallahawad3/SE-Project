@@ -271,3 +271,4 @@ addPostBtn.addEventListener("click", () => {
     window.localStorage.setItem("idOfUser", idOfUser);
     window.location = "profile.html";
   }
+  
