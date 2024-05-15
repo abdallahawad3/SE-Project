@@ -85,3 +85,9 @@ LoginButton.addEventListener("click", () => {
   login(username, password);
 });
 
+// Function to hide the login modal after successful user login //
+function hideModel(modelName) {
+  let model = document.getElementById(modelName);
+  let modelInstance = bootstrap.Modal.getInstance(model);
+  modelInstance.hide();
+}
